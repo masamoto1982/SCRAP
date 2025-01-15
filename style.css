@@ -1,0 +1,198 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+#header {
+    background: ;
+    padding: 0.5em;/*必要*/
+}
+
+#output {
+    background: ;
+    padding: 0.5em;/*必要*/
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    word-wrap: break-word;
+    max-height: 200px;
+    position: relative;
+}
+
+#outputContent {
+    border: 1px dashed #ccc;
+    padding: 0.5em;/*必要*/
+}
+
+.flex_1 {
+    display: flex;
+}
+
+.flex_2 {
+    display: flex;
+    align-items: center;/*直接入力欄縦伸び回避*/
+    gap: 1em;/*直接入力欄接触回避*/
+}
+
+.flex_3 {
+    display: flex;
+	gap: 0.5em;/*Runボタン接触回避*/
+	margin-top: 0.5em;
+	
+}
+
+.flex_4 {
+    display: flex;
+    align-items: center;/*Runボタン縦伸び回避*/
+    gap: 1em;/*Runボタン接触回避*/
+}
+
+.flex_5{
+	display: flex;
+}
+
+.flex_6,.flex_7 {
+    display: flex;
+    align-items: center;/*直接入力欄縦伸び回避*/
+    gap: 1em;/*直接入力欄接触回避*/
+}
+
+.control-button {/*すべてのコントロールボタンで共通*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;/*押せることを伝える*/
+}
+
+.control-button:hover {
+    background: #f0f0f0;
+}
+
+.word-button {/*画面上のすべてのボタンに共通*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;/*ドラッグ操作であることを伝える*/
+}
+
+.word-button:hover {
+    background: #f0f0f0;
+}
+
+
+
+#stack {
+    border: 1px solid #ccc;
+    background: ;
+    width: 50%;
+    padding: 0.5em;/*必要*/
+}
+
+.stackInput {
+    border: 1px solid #ccc;
+    flex-grow: 1;
+}
+
+#stack_d {
+    flex-grow: 1;
+    border: 1px dashed #ccc;
+    padding: 0.5em;/*必要*/
+    margin: 0 0.25em 0 0;/*必要*/
+}
+
+#stack_r {
+    flex-grow: 1;
+    border: 1px dashed #ccc;
+    padding: 0.5em;/*必要*/
+    margin: 0 0 0 0.25em;/*必要*/
+}
+
+
+
+.words-container,
+.stackContainer {
+    display: flex;
+    flex-wrap: wrap; /* ボタンを折り返して並べる */
+    gap: 0.5em; /* ボタン間の間隔を統一 */
+    align-items: center; /* ボタンを中央揃え */
+}
+
+
+.stack-placeholder {/*スタックが空のときのメッセージ、あってもなくてもいい*/
+    color: #ccc;
+    text-align: center;
+}
+
+
+
+.faded-button {
+    opacity: 0.5;/*スタックトップ以外のボタンを薄く表示*/
+}
+
+
+
+#Dictionary {
+    border: 1px solid #ccc;
+    background: ;
+    width: 50%;
+    padding: 0.5em;/*必要*/
+}
+
+#builtInWords {
+    border: 1px dashed #ccc;
+    padding: 0.5em;/*必要*/
+    margin-bottom: 0.5em;/*CustomWordエリア接触回避*/
+}
+
+#customWords {
+    border: 1px dashed #ccc;
+    padding: 0.5em;/*必要*/
+}
+
+#delete-word,#wordName,#wordDefinition,#wordDescription {
+    border: 1px solid #ccc;
+}
+
+
+
+@media (max-width: 768px) {
+    .flex_2,.flex_3,.flex_5,.flex_6,.flex_7 {
+        display: block;
+    }
+
+    #stack_d {
+        margin: 0 0 0.5em 0;
+    }
+
+    #stack_r {
+        margin: 0;
+    }
+	.stackContainer{
+		margin-top: 0.5em;
+	}
+	
+	
+}
+
+@media (max-width: 480px) {
+    header {
+        display: none;
+    }
+
+    #Dictionary {
+        order: 2;
+        width: 100%;
+    }
+
+    #stack {
+        order: 1;
+        width: 100%;
+    }
+
+    .flex_1 {
+	    display: block;
+    }
+	.flex_3{
+       flex-flow: column;
+	}
+}

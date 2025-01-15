@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCRAP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <h1>SCRAP</h1>
+    </header>
+    <article>
+        <section id="output">
+            <h2>Output</h2>
+            <div id="outputContent"></div>
+        </section>
+        <div class="flex_1">
+            <section id="Dictionary">
+                <h2>Dictionary</h2>
+                <div id="builtInWords">
+                    <h3>Built-in Words</h3>
+                    <div class="words-container">
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Add">+</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Subtract">-</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Multiply">*</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Divide">/</button><br>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Equal to">=</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Not equal to">&lt;&gt;</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Greater than">&gt;</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Less than">&lt;</button><br>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Less than or equal">&lt;=</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Greater than or equal">&gt;=</button><br>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Duplicate top of stack">DUP</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Start conditional">IF</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Else condition">ELSE</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="End conditional">THEN</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Start loop">DO</button>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="End loop">LOOP</button><br>
+                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Clear stack">CLEAR</button>
+                    </div>
+                </div>
+                
+                <div id="customWords">
+                    <div class="flex_2">
+                        <h3>Custom Words</h3>
+                        <input type="text" id="deleteWordInput" placeholder="Delete Word" onkeypress="handleDeleteWord(event)" ondrop="handleDeleteDrop(event)" ondragover="allowDrop(event)">
+                    </div>
+                    <div class="words-container" id="customWordsContainer"></div>
+                    <div class="flex_3">
+                        <input type="text" id="wordName" placeholder="Word Name" onkeypress="handleWordDefinitionKeypress(event, 'wordName')">
+                        <input type="text" id="wordDefinition" placeholder="Word Definition" onkeypress="handleWordDefinitionKeypress(event, 'wordDefinition')">
+                        <input type="text" id="wordDescription" placeholder="Word Description" onkeypress="handleWordDefinitionKeypress(event, 'wordDescription')">
+                        <button class="control-button" onclick="defineWord()">Define</button>
+                    </div>
+                </div>
+            </section>
+            <section id="stack">
+                <div class="flex_4">
+                    <h2>Stacks</h2>
+                    <button id="runButton" class="control-button" onclick="runAllStacks()">▶</button>
+                </div>
+                <div class="flex_5">
+                    <div id="stack_d">
+                        <div class="flex_6">
+                            <h3>Stack_D</h3>
+                            <input type="text" class="stackInput" id="stackDInput" placeholder="Enter value" onkeypress="handleStackInput(event, 'D')" ondrop="dropToStack(event, 'stackDInput')" ondragover="allowDrop(event)">
+                        </div>
+                        <div class="stackContainer" id="stackDContainer" ondrop="dropToStack(event, 'D')" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div id="stack_r">
+                        <div class="flex_7">
+                            <h3>Stack_R</h3>
+                            <input type="text" class="stackInput" id="stackRInput" placeholder="Enter value" onkeypress="handleStackInput(event, 'R')" ondrop="dropToStack(event, 'stackRInput')" ondragover="allowDrop(event)">
+                        </div>
+                        <div class="stackContainer" id="stackRContainer" ondrop="dropToStack(event, 'R')" ondragover="allowDrop(event)"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </article>
+    <script src="dict.js"></script>
+    <script src="outer.js"></script>
+    <script src="repl.js"></script>
+    <script src="inner.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
