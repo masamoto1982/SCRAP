@@ -156,7 +156,7 @@ body {
 
 
 @media (max-width: 768px) {
-    .flex_2,.flex_3,.flex_5,.flex_6,.flex_7 {
+    .flex_2,.flex_3,.flex_5 {
         display: block;
     }
 
