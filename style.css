@@ -68,15 +68,17 @@ body {
     background: #f0f0f0;
 }
 
-.word-button {/*画面上のすべてのボタンに共通*/
+.word-button {
     border: 1px solid #ccc;
     border-radius: 4px;
     background: #fff;
-    cursor: pointer;/*ドラッグ操作であることを伝える*/
+    cursor: pointer;
+    padding: 0.5em 1em; /* タップしやすいサイズに */
+    touch-action: manipulation; /* タップの遅延を防ぐ */
 }
 
-.word-button:hover {
-    background: #f0f0f0;
+.word-button:active {
+    background: #e0e0e0; /* タップ時の視覚的フィードバック */
 }
 
 
