@@ -155,44 +155,115 @@ body {
 
 
 @media (max-width: 768px) {
-    /* 既存のスタイル */
     .flex_2,.flex_3,.flex_5 {
         display: block;
     }
 
-    /* 以下を追加 */
     .flex_6, .flex_7 {
-        display: block;  /* flexを解除 */
+        display: block;
     }
 
     .stackInput {
-        width: 100%;    /* 入力欄を親要素の幅いっぱいに */
-        box-sizing: border-box;  /* paddingやborderを幅に含める */
-        margin-top: 0.5em;  /* 見出しとの間隔 */
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 0.5em;
     }
 
+    /* Stack領域の調整 */
+    #stack_d {
+        margin: 0 0 1em 0;  /* 下部に余白を設定 */
+        width: auto;
+    }
+
+    #stack_r {
+        margin: 0;
+        width: auto;
+    }
+
+    /* Stack内の要素配置の調整 */
     #stack_d, #stack_r {
-        padding: 0.5em;
-        width: auto;    /* 親要素に合わせる */
+        padding: 1em;  /* 内部の余白を統一 */
+    }
+
+    /* 見出しの配置調整 */
+    #stack_d h3, #stack_r h3 {
+        margin: 0;  /* デフォルトマージンをリセット */
+    }
+
+    /* スタックコンテナの配置調整 */
+    .stackContainer {
+        margin-top: 1em;  /* 入力欄との間隔 */
+        min-height: 50px;  /* 最小の高さを確保 */
     }
 }
 
 @media (max-width: 480px) {
-    header {
-        display: none;
+    /* 全体の幅制御 */
+    body {
+        max-width: 100%;
+        overflow-x: hidden; /* 横スクロール防止 */
     }
 
+    article {
+        padding: 0.5em; /* 画面端との余白 */
+        box-sizing: border-box; /* paddingを幅に含める */
+    }
+
+    /* 各エリアの幅を統一 */
+    #output,
+    #stack,
     #Dictionary {
-        order: 2;
         width: 100%;
+        box-sizing: border-box;
+        margin: 0 0 1em 0; /* 下部に余白 */
+    }
+
+    .flex_1 {
+        display: flex;
+        flex-direction: column;
     }
 
     #stack {
         order: 1;
-        width: 100%;
     }
 
-    .flex_1 {
-	    display: block;
+    #Dictionary {
+        order: 2;
+    }
+
+    /* Stack内の見出しと入力欄の横並び維持 */
+    .flex_6, .flex_7 {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+
+    /* Dictionary内の見出しと消去欄の横並び */
+    .flex_2 {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+
+    /* カスタムワード定義欄を縦並びに */
+    .flex_3 {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+
+    /* 入力欄のスタイル調整 */
+    .stackInput,
+    #deleteWordInput,
+    #wordName,
+    #wordDefinition,
+    #wordDescription {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 見出しのマージン調整 */
+    h3 {
+        margin: 0;
     }
 }
