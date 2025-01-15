@@ -18,28 +18,28 @@
         <div class="flex_1">
             <section id="Dictionary">
                 <h2>Dictionary</h2>
-                <div id="builtInWords">
-                    <h3>Built-in Words</h3>
-                    <div class="words-container">
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Add">+</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Subtract">-</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Multiply">*</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Divide">/</button><br>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Equal to">=</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Not equal to">&lt;&gt;</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Greater than">&gt;</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Less than">&lt;</button><br>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Less than or equal">&lt;=</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Greater than or equal">&gt;=</button><br>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Duplicate top of stack">DUP</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Start conditional">IF</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Else condition">ELSE</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="End conditional">THEN</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Start loop">DO</button>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="End loop">LOOP</button><br>
-                        <button class="word-button" draggable="true" ondragstart="drag(event)" title="Clear stack">CLEAR</button>
-                    </div>
-                </div>
+               <div id="builtInWords">
+    <h3>Built-in Words</h3>
+    <div class="words-container">
+        <button class="word-button" onclick="pushToStackD('+')" title="Add">+</button>
+        <button class="word-button" onclick="pushToStackD('-')" title="Subtract">-</button>
+        <button class="word-button" onclick="pushToStackD('*')" title="Multiply">*</button>
+        <button class="word-button" onclick="pushToStackD('/')" title="Divide">/</button><br>
+        <button class="word-button" onclick="pushToStackD('=')" title="Equal to">=</button>
+        <button class="word-button" onclick="pushToStackD('<>')" title="Not equal to">&lt;&gt;</button>
+        <button class="word-button" onclick="pushToStackD('>')" title="Greater than">&gt;</button>
+        <button class="word-button" onclick="pushToStackD('<')" title="Less than">&lt;</button><br>
+        <button class="word-button" onclick="pushToStackD('<=')" title="Less than or equal">&lt;=</button>
+        <button class="word-button" onclick="pushToStackD('>=')" title="Greater than or equal">&gt;=</button><br>
+        <button class="word-button" onclick="pushToStackD('DUP')" title="Duplicate top of stack">DUP</button>
+        <button class="word-button" onclick="pushToStackD('IF')" title="Start conditional">IF</button>
+        <button class="word-button" onclick="pushToStackD('ELSE')" title="Else condition">ELSE</button>
+        <button class="word-button" onclick="pushToStackD('THEN')" title="End conditional">THEN</button>
+        <button class="word-button" onclick="pushToStackD('DO')" title="Start loop">DO</button>
+        <button class="word-button" onclick="pushToStackD('LOOP')" title="End loop">LOOP</button><br>
+        <button class="word-button" onclick="pushToStackD('CLEAR')" title="Clear stack">CLEAR</button>
+    </div>
+</div>
                 
                 <div id="customWords">
                     <div class="flex_2">
