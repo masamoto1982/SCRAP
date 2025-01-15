@@ -154,24 +154,27 @@ body {
 }
 
 
-
 @media (max-width: 768px) {
+    /* 既存のスタイル */
     .flex_2,.flex_3,.flex_5 {
         display: block;
     }
 
-    #stack_d {
-        margin: 0 0 0.5em 0;
+    /* 以下を追加 */
+    .flex_6, .flex_7 {
+        display: block;  /* flexを解除 */
     }
 
-    #stack_r {
-        margin: 0;
+    .stackInput {
+        width: 100%;    /* 入力欄を親要素の幅いっぱいに */
+        box-sizing: border-box;  /* paddingやborderを幅に含める */
+        margin-top: 0.5em;  /* 見出しとの間隔 */
     }
-	.stackContainer{
-		margin-top: 0.5em;
-	}
-	
-	
+
+    #stack_d, #stack_r {
+        padding: 0.5em;
+        width: auto;    /* 親要素に合わせる */
+    }
 }
 
 @media (max-width: 480px) {
