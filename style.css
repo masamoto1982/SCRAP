@@ -192,7 +192,4 @@ body {
     .flex_1 {
 	    display: block;
     }
-	.flex_3{
-       flex-flow: column;
-	}
 }
