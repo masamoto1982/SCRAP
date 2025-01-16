@@ -6,12 +6,12 @@ body {
 
 #header {
     background: ;
-    padding: 0.5em;/*必要*/
+    padding: 0.5em;
 }
 
 #output {
     background: ;
-    padding: 0.5em;/*必要*/
+    padding: 0.5em;
     border: 1px solid #ccc;
     overflow-y: auto;
     word-wrap: break-word;
@@ -21,7 +21,7 @@ body {
 
 #outputContent {
     border: 1px dashed #ccc;
-    padding: 0.5em;/*必要*/
+    padding: 0.5em;
 }
 
 .flex_1 {
@@ -30,38 +30,39 @@ body {
 
 .flex_2 {
     display: flex;
-    align-items: center;/*直接入力欄縦伸び回避*/
-    gap: 1em;/*直接入力欄接触回避*/
+    align-items: center;
+    gap: 1em;
 }
 
 .flex_3 {
     display: flex;
-	gap: 0.5em;/*Runボタン接触回避*/
-	margin-top: 0.5em;
-	
+    gap: 0.5em;
+    margin-top: 0.5em;
+    flex-wrap: wrap;
 }
 
 .flex_4 {
     display: flex;
-    align-items: center;/*Runボタン縦伸び回避*/
-    gap: 1em;/*Runボタン接触回避*/
+    align-items: center;
+    gap: 1em;
 }
 
-.flex_5{
-	display: flex;
-}
-
-.flex_6,.flex_7 {
+.flex_5 {
     display: flex;
-    align-items: center;/*直接入力欄縦伸び回避*/
-    gap: 1em;/*直接入力欄接触回避*/
 }
 
-.control-button {/*すべてのコントロールボタンで共通*/
+.flex_6, .flex_7 {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.control-button {
     border: 1px solid #ccc;
     border-radius: 4px;
     background: #fff;
-    cursor: pointer;/*押せることを伝える*/
+    cursor: pointer;
 }
 
 .control-button:hover {
@@ -73,96 +74,105 @@ body {
     border-radius: 4px;
     background: #fff;
     cursor: pointer;
-    padding: 0.5em 1em; /* タップしやすいサイズに */
-    touch-action: manipulation; /* タップの遅延を防ぐ */
+    touch-action: manipulation;
+}
+
+.word-button:hover {
+    background: #f0f0f0;
 }
 
 .word-button:active {
-    background: #e0e0e0; /* タップ時の視覚的フィードバック */
+    background: #e0e0e0;
 }
-
-
 
 #stack {
     border: 1px solid #ccc;
     background: ;
     width: 50%;
-    padding: 0.5em;/*必要*/
+    padding: 0.5em;
 }
 
 .stackInput {
     border: 1px solid #ccc;
     flex-grow: 1;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
-#stack_d {
+#DataStack {
     flex-grow: 1;
     border: 1px dashed #ccc;
-    padding: 0.5em;/*必要*/
-    margin: 0 0.25em 0 0;/*必要*/
+    padding: 0.5em;
+    margin: 0 0.25em 0 0;
 }
 
-#stack_r {
+#ReturnStack {
     flex-grow: 1;
     border: 1px dashed #ccc;
-    padding: 0.5em;/*必要*/
-    margin: 0 0 0 0.25em;/*必要*/
+    padding: 0.5em;
+    margin: 0 0 0 0.25em;
 }
 
-
-
-.words-container,
-.stackContainer {
+.words-container {
     display: flex;
-    flex-wrap: wrap; /* ボタンを折り返して並べる */
-    gap: 0.5em; /* ボタン間の間隔を統一 */
-    align-items: center; /* ボタンを中央揃え */
+    flex-direction: column;
+    gap: 0.5em;
 }
 
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
+}
 
-.stack-placeholder {/*スタックが空のときのメッセージ、あってもなくてもいい*/
+.button-group:last-child {
+    margin-bottom: 0;
+}
+
+#builtInWords h3 {
+    margin-bottom: 1em;
+}
+
+.stack-placeholder {
     color: #ccc;
     text-align: center;
 }
 
-
-
 .faded-button {
-    opacity: 0.5;/*スタックトップ以外のボタンを薄く表示*/
+    opacity: 0.5;
 }
-
-
 
 #Dictionary {
     border: 1px solid #ccc;
     background: ;
     width: 50%;
-    padding: 0.5em;/*必要*/
+    padding: 0.5em;
 }
 
 #builtInWords {
     border: 1px dashed #ccc;
-    padding: 0.5em;/*必要*/
-    margin-bottom: 0.5em;/*CustomWordエリア接触回避*/
+    padding: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 #customWords {
     border: 1px dashed #ccc;
-    padding: 0.5em;/*必要*/
+    padding: 0.5em;
 }
 
-#delete-word,#wordName,#wordDefinition,#wordDescription {
+#delete-word, #wordName, #wordDefinition, #wordDescription {
     border: 1px solid #ccc;
 }
 
-
 @media (max-width: 768px) {
-    .flex_2,.flex_3,.flex_5 {
+    .flex_2, .flex_3, .flex_5 {
         display: block;
     }
 
     .flex_6, .flex_7 {
         display: block;
+        width: 100%;
     }
 
     .stackInput {
@@ -171,53 +181,69 @@ body {
         margin-top: 0.5em;
     }
 
-    /* Stack領域の調整 */
-    #stack_d {
-        margin: 0 0 1em 0;  /* 下部に余白を設定 */
+    #DataStack {
+        margin: 0 0 1em 0;
         width: auto;
     }
 
-    #stack_r {
+    #ReturnStack {
         margin: 0;
         width: auto;
     }
 
-    /* Stack内の要素配置の調整 */
-    #stack_d, #stack_r {
-        padding: 1em;  /* 内部の余白を統一 */
+    #DataStack, #ReturnStack {
+        padding: 1em;
     }
 
-    /* 見出しの配置調整 */
-    #stack_d h3, #stack_r h3 {
-        margin: 0;  /* デフォルトマージンをリセット */
+    h3 {
+        margin: 0;
     }
 
-    /* スタックコンテナの配置調整 */
     .stackContainer {
-        margin-top: 1em;  /* 入力欄との間隔 */
-        min-height: 50px;  /* 最小の高さを確保 */
+        margin-top: 1em;
+        min-height: 50px;
+    }
+
+    .flex_3 {
+        display: block;
+        width: 100%;
+    }
+
+    #wordName,
+    #wordDefinition,
+    #wordDescription {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 0.5em;
+    }
+
+    #wordDescription {
+        margin-bottom: 0;
+    }
+
+    .flex_3 .control-button {
+        width: 100%;
+        margin-top: 0.5em;
     }
 }
 
 @media (max-width: 480px) {
-    /* 全体の幅制御 */
     body {
         max-width: 100%;
-        overflow-x: hidden; /* 横スクロール防止 */
+        overflow-x: hidden;
     }
 
     article {
-        padding: 0.5em; /* 画面端との余白 */
-        box-sizing: border-box; /* paddingを幅に含める */
+        padding: 0.5em;
+        box-sizing: border-box;
     }
 
-    /* 各エリアの幅を統一 */
     #output,
     #stack,
     #Dictionary {
         width: 100%;
         box-sizing: border-box;
-        margin: 0 0 1em 0; /* 下部に余白 */
+        margin: 0 0 1em 0;
     }
 
     .flex_1 {
@@ -233,28 +259,29 @@ body {
         order: 2;
     }
 
-    /* Stack内の見出しと入力欄の横並び維持 */
     .flex_6, .flex_7 {
         display: flex;
         align-items: center;
         gap: 1em;
+        flex-wrap: nowrap;
     }
 
-    /* Dictionary内の見出しと消去欄の横並び */
     .flex_2 {
         display: flex;
         align-items: center;
         gap: 1em;
     }
 
-    /* カスタムワード定義欄を縦並びに */
     .flex_3 {
         display: flex;
         flex-direction: column;
         gap: 0.5em;
     }
 
-    /* 入力欄のスタイル調整 */
+    .stackInput {
+        min-width: 0;
+    }
+
     .stackInput,
     #deleteWordInput,
     #wordName,
@@ -264,7 +291,6 @@ body {
         box-sizing: border-box;
     }
 
-    /* 見出しのマージン調整 */
     h3 {
         margin: 0;
     }

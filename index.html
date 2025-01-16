@@ -18,28 +18,38 @@
         <div class="flex_1">
             <section id="Dictionary">
                 <h2>Dictionary</h2>
-               <div id="builtInWords">
-    <h3>Built-in Words</h3>
-    <div class="words-container">
-        <button class="word-button" onclick="pushToStackD('+')" title="Add">+</button>
-        <button class="word-button" onclick="pushToStackD('-')" title="Subtract">-</button>
-        <button class="word-button" onclick="pushToStackD('*')" title="Multiply">*</button>
-        <button class="word-button" onclick="pushToStackD('/')" title="Divide">/</button><br>
-        <button class="word-button" onclick="pushToStackD('=')" title="Equal to">=</button>
-        <button class="word-button" onclick="pushToStackD('<>')" title="Not equal to">&lt;&gt;</button>
-        <button class="word-button" onclick="pushToStackD('>')" title="Greater than">&gt;</button>
-        <button class="word-button" onclick="pushToStackD('<')" title="Less than">&lt;</button><br>
-        <button class="word-button" onclick="pushToStackD('<=')" title="Less than or equal">&lt;=</button>
-        <button class="word-button" onclick="pushToStackD('>=')" title="Greater than or equal">&gt;=</button><br>
-        <button class="word-button" onclick="pushToStackD('DUP')" title="Duplicate top of stack">DUP</button>
-        <button class="word-button" onclick="pushToStackD('IF')" title="Start conditional">IF</button>
-        <button class="word-button" onclick="pushToStackD('ELSE')" title="Else condition">ELSE</button>
-        <button class="word-button" onclick="pushToStackD('THEN')" title="End conditional">THEN</button>
-        <button class="word-button" onclick="pushToStackD('DO')" title="Start loop">DO</button>
-        <button class="word-button" onclick="pushToStackD('LOOP')" title="End loop">LOOP</button><br>
-        <button class="word-button" onclick="pushToStackD('CLEAR')" title="Clear stack">CLEAR</button>
-    </div>
-</div>
+                <div id="builtInWords">
+                    <h3>Built-in Words</h3>
+                    <div class="words-container">
+                        <div class="button-group">
+                            <button class="word-button" onclick="pushToDataStack('+')" title="Add">+</button>
+                            <button class="word-button" onclick="pushToDataStack('-')" title="Subtract">-</button>
+                            <button class="word-button" onclick="pushToDataStack('*')" title="Multiply">*</button>
+                            <button class="word-button" onclick="pushToDataStack('/')" title="Divide">/</button>
+                        </div>
+                        <div class="button-group">
+                            <button class="word-button" onclick="pushToDataStack('=')" title="Equal to">=</button>
+                            <button class="word-button" onclick="pushToDataStack('<>')" title="Not equal to">&lt;&gt;</button>
+                            <button class="word-button" onclick="pushToDataStack('>')" title="Greater than">&gt;</button>
+                            <button class="word-button" onclick="pushToDataStack('<')" title="Less than">&lt;</button>
+                        </div>
+                        <div class="button-group">
+                            <button class="word-button" onclick="pushToDataStack('<=')" title="Less than or equal">&lt;=</button>
+                            <button class="word-button" onclick="pushToDataStack('>=')" title="Greater than or equal">&gt;=</button>
+                        </div>
+                        <div class="button-group">
+                            <button class="word-button" onclick="pushToDataStack('DUP')" title="Duplicate top of stack">DUP</button>
+                            <button class="word-button" onclick="pushToDataStack('IF')" title="Start conditional">IF</button>
+                            <button class="word-button" onclick="pushToDataStack('ELSE')" title="Else condition">ELSE</button>
+                            <button class="word-button" onclick="pushToDataStack('THEN')" title="End conditional">THEN</button>
+                            <button class="word-button" onclick="pushToDataStack('DO')" title="Start loop">DO</button>
+                            <button class="word-button" onclick="pushToDataStack('LOOP')" title="End loop">LOOP</button>
+                        </div>
+                        <div class="button-group">
+                            <button class="word-button" onclick="pushToDataStack('CLEAR')" title="Clear stack">CLEAR</button>
+                        </div>
+                    </div>
+                </div>
                 
                 <div id="customWords">
                     <div class="flex_2">
@@ -57,23 +67,23 @@
             </section>
             <section id="stack">
                 <div class="flex_4">
-                    <h2>Stacks</h2>
+                    <h2>Stack</h2>
                     <button id="runButton" class="control-button" onclick="runAllStacks()">▶</button>
                 </div>
                 <div class="flex_5">
-                    <div id="stack_d">
+                    <div id="DataStack">
                         <div class="flex_6">
-                            <h3>Stack_D</h3>
-                            <input type="text" class="stackInput" id="stackDInput" placeholder="Enter value" onkeypress="handleStackInput(event, 'D')" ondrop="dropToStack(event, 'stackDInput')" ondragover="allowDrop(event)">
+                            <h3>Data Stack</h3>
+                            <input type="text" class="stackInput" id="DataStackInput" placeholder="Enter value" onkeypress="handleStackInput(event, 'Data')" ondrop="dropToStack(event, 'DataStackInput')" ondragover="allowDrop(event)">
                         </div>
-                        <div class="stackContainer" id="stackDContainer" ondrop="dropToStack(event, 'D')" ondragover="allowDrop(event)"></div>
+                        <div class="stackContainer" id="DataStackContainer" ondrop="dropToStack(event, 'Data')" ondragover="allowDrop(event)"></div>
                     </div>
-                    <div id="stack_r">
+                    <div id="ReturnStack">
                         <div class="flex_7">
-                            <h3>Stack_R</h3>
-                            <input type="text" class="stackInput" id="stackRInput" placeholder="Enter value" onkeypress="handleStackInput(event, 'R')" ondrop="dropToStack(event, 'stackRInput')" ondragover="allowDrop(event)">
+                            <h3>Return Stack</h3>
+                            <input type="text" class="stackInput" id="ReturnStackInput" placeholder="Enter value" onkeypress="handleStackInput(event, 'Return')" ondrop="dropToStack(event, 'ReturnStackInput')" ondragover="allowDrop(event)">
                         </div>
-                        <div class="stackContainer" id="stackRContainer" ondrop="dropToStack(event, 'R')" ondragover="allowDrop(event)"></div>
+                        <div class="stackContainer" id="ReturnStackContainer" ondrop="dropToStack(event, 'Return')" ondragover="allowDrop(event)"></div>
                     </div>
                 </div>
             </section>
