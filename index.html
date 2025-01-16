@@ -8,15 +8,15 @@
 </head>
 <body>
    <header id="page_header">
-    <div class="header_content">
-        <div class="logo">
-            <img src="images/QR_989156.png" alt="SCRAP logo">
-        </div>
-        <h1>
-            <ruby>SCRAP<rt>GUI FORTH</rt></ruby>
-        </h1>
-    </div>
-</header>
+       <div class="header_content">
+           <div class="logo">
+               <img src="images/logo.png" alt="SCRAP logo">
+           </div>
+           <h1>
+               <ruby>SCRAP<rt>GUI FORTH</rt></ruby>
+           </h1>
+       </div>
+   </header>
    <article>
        <section id="output">
            <h2>Output</h2>
@@ -29,6 +29,17 @@
                    <h3>Built-in Words</h3>
                    <div class="words_container">
                        <div class="button_group">
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('DUP')" title="Duplicate top of stack">DUP</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('DROP')" title="Drop top of stack">DROP</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('SWAP')" title="Exchange top two items">SWAP</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('OVER')" title="Copy second item to top">OVER</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('ROT')" title="Rotate top three items">ROT</button>
+                       </div>
+                       <div class="button_group">
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('>R')" title="Move from data stack to return stack">&gt;R</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('R>')" title="Move from return stack to data stack">R&gt;</button>
+                       </div>
+                       <div class="button_group">
                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('+')" title="Add">+</button>
                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('-')" title="Subtract">-</button>
                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('*')" title="Multiply">*</button>
@@ -36,24 +47,15 @@
                        </div>
                        <div class="button_group">
                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('=')" title="Equal to">=</button>
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('<>')" title="Not equal to">&lt;&gt;</button>
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('>')" title="Greater than">&gt;</button>
                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('<')" title="Less than">&lt;</button>
                        </div>
                        <div class="button_group">
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('<=')" title="Less than or equal">&lt;=</button>
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('>=')" title="Greater than or equal">&gt;=</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('IF')" title="Start conditional">IF</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('THEN')" title="End conditional">THEN</button>
                        </div>
                        <div class="button_group">
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('DUP')" title="Duplicate top of stack">DUP</button>
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('IF')" title="Start conditional">IF</button>
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('ELSE')" title="Else condition">ELSE</button>
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('THEN')" title="End conditional">THEN</button>
                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('DO')" title="Start loop">DO</button>
                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('LOOP')" title="End loop">LOOP</button>
-                       </div>
-                       <div class="button_group">
-                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('CLEAR')" title="Clear stack">CLEAR</button>
                        </div>
                    </div>
                </div>
