@@ -181,8 +181,8 @@ body {
         margin-top: 0.5em;
     }
 
-    #DataStack {
-        margin: 0 0 1em 0;
+     #DataStack {
+        margin: 0 0 0.5em 0;  /* 1emから0.5emに変更 */
         width: auto;
     }
 
