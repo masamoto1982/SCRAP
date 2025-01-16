@@ -31,9 +31,13 @@ h1 {
     margin: 0;
 }
 
+h1 ruby {
+    text-align: left;  /* ルビを左揃えに */
+}
+
 h1 ruby rt {
-    font-size: 0.4em;  /* ルビの文字サイズを調整 */
-    text-align: center;  /* ルビを中央揃えに */
+    font-size: 0.4em;
+    text-align: left;  /* ルビを左揃えに */
 }
 
 #output {
