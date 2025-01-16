@@ -12,32 +12,19 @@ body {
 .header_content {
    display: flex;
    align-items: center;
-   gap: 1em;
-}
-
-.logo {
-   width: 2em;
-   height: 2em;
-   flex-shrink: 0;
-}
-
-.logo img {
-   width: 100%;
-   height: 100%;
-   object-fit: cover;
+   gap: 0.5em;
 }
 
 h1 {
-    margin: 0;
+   margin: 0;
+   line-height: 1;
 }
 
-h1 ruby {
-    text-align: left;  /* ルビを左揃えに */
-}
-
-h1 ruby rt {
-    font-size: 0.4em;
-    text-align: left;  /* ルビを左揃えに */
+h1 .subtitle {
+   display: block;
+   font-size: 0.4em;
+   margin-top: 0.1em;
+   line-height: 1;
 }
 
 #output {
@@ -59,17 +46,41 @@ h1 ruby rt {
    display: flex;
 }
 
-.flex_2 {
+.flex_2, .flex_6 {
    display: flex;
    align-items: center;
    gap: 1em;
+   flex-wrap: nowrap;
+}
+
+.flex_2 h3, .flex_6 h3 {
+   flex-shrink: 0;
+}
+
+.stack_input, #delete_word_input {
+   border: 1px solid #ccc;
+   flex: 1;
+   min-width: 0;
+   box-sizing: border-box;
 }
 
 .flex_3 {
    display: flex;
    gap: 0.5em;
    margin-top: 0.5em;
-   flex-wrap: wrap;
+   flex-wrap: nowrap;
+}
+
+#word_name,
+#word_definition,
+#word_description {
+   border: 1px solid #ccc;
+   flex: 1;
+   min-width: 0;
+}
+
+.flex_3 .control_button {
+   flex-shrink: 0;
 }
 
 .flex_4 {
@@ -80,13 +91,14 @@ h1 ruby rt {
 
 .flex_5 {
    display: flex;
+   gap: 0.5em;
+   width: 100%;
 }
 
-.flex_6, .flex_7 {
+.flex_7 {
    display: flex;
    align-items: center;
    gap: 1em;
-   flex-wrap: wrap;
 }
 
 .control_button {
@@ -123,25 +135,14 @@ h1 ruby rt {
    padding: 0.5em;
 }
 
-.stack_input {
-   border: 1px solid #ccc;
-   flex-grow: 1;
-   min-width: 0;
-   box-sizing: border-box;
-}
-
-#data_stack {
-   flex-grow: 1;
+#data_stack, #return_stack {
+   width: calc(50% - 0.25em);
    border: 1px dashed #ccc;
    padding: 0.5em;
-   margin: 0 0.25em 0 0;
 }
 
 #return_stack {
-   flex-grow: 1;
-   border: 1px dashed #ccc;
-   padding: 0.5em;
-   margin: 0 0 0 0.25em;
+   opacity: 0.8;
 }
 
 .words_container {
@@ -192,13 +193,13 @@ h1 ruby rt {
    padding: 0.5em;
 }
 
-#delete_word, #word_name, #word_definition, #word_description {
-   border: 1px solid #ccc;
-}
-
 @media (max-width: 768px) {
    .flex_2, .flex_3, .flex_5 {
        display: block;
+   }
+
+   .flex_2 {
+       width: 100%;
    }
 
    .flex_6, .flex_7 {
@@ -206,7 +207,7 @@ h1 ruby rt {
        width: 100%;
    }
 
-   .stack_input {
+   .stack_input, #delete_word_input {
        width: 100%;
        box-sizing: border-box;
        margin-top: 0.5em;
@@ -223,7 +224,7 @@ h1 ruby rt {
    }
 
    #data_stack, #return_stack {
-       padding: 1em;
+       padding: 0.5em;
    }
 
    h3 {
@@ -265,9 +266,9 @@ h1 ruby rt {
    }
 
    article {
-       padding: 0.5em;
-       box-sizing: border-box;
-   }
+        padding: 0.5em;
+        box-sizing: border-box;
+    }
 
    #output,
    #stack,
