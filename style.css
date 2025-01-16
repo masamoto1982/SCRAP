@@ -241,10 +241,10 @@ body {
     #output,
     #stack,
     #Dictionary {
-        width: 100%;
-        box-sizing: border-box;
-        margin: 0 0 1em 0;
-    }
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;  /* マージンを0に修正 */
+}
 
     .flex_1 {
         display: flex;
