@@ -1,98 +1,105 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCRAP</title>
-    <link rel="stylesheet" href="style.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>SCRAP</title>
+   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header id="header">
-        <h1>SCRAP</h1>
-    </header>
-    <article>
-        <section id="output">
-            <h2>Output</h2>
-            <div id="outputContent"></div>
-        </section>
-        <div class="flex_1">
-            <section id="Dictionary">
-                <h2>Dictionary</h2>
-                <div id="builtInWords">
-                    <h3>Built-in Words</h3>
-                    <div class="words-container">
-                        <div class="button-group">
-                            <button class="word-button" onclick="pushToDataStack('+')" title="Add">+</button>
-                            <button class="word-button" onclick="pushToDataStack('-')" title="Subtract">-</button>
-                            <button class="word-button" onclick="pushToDataStack('*')" title="Multiply">*</button>
-                            <button class="word-button" onclick="pushToDataStack('/')" title="Divide">/</button>
-                        </div>
-                        <div class="button-group">
-                            <button class="word-button" onclick="pushToDataStack('=')" title="Equal to">=</button>
-                            <button class="word-button" onclick="pushToDataStack('<>')" title="Not equal to">&lt;&gt;</button>
-                            <button class="word-button" onclick="pushToDataStack('>')" title="Greater than">&gt;</button>
-                            <button class="word-button" onclick="pushToDataStack('<')" title="Less than">&lt;</button>
-                        </div>
-                        <div class="button-group">
-                            <button class="word-button" onclick="pushToDataStack('<=')" title="Less than or equal">&lt;=</button>
-                            <button class="word-button" onclick="pushToDataStack('>=')" title="Greater than or equal">&gt;=</button>
-                        </div>
-                        <div class="button-group">
-                            <button class="word-button" onclick="pushToDataStack('DUP')" title="Duplicate top of stack">DUP</button>
-                            <button class="word-button" onclick="pushToDataStack('IF')" title="Start conditional">IF</button>
-                            <button class="word-button" onclick="pushToDataStack('ELSE')" title="Else condition">ELSE</button>
-                            <button class="word-button" onclick="pushToDataStack('THEN')" title="End conditional">THEN</button>
-                            <button class="word-button" onclick="pushToDataStack('DO')" title="Start loop">DO</button>
-                            <button class="word-button" onclick="pushToDataStack('LOOP')" title="End loop">LOOP</button>
-                        </div>
-                        <div class="button-group">
-                            <button class="word-button" onclick="pushToDataStack('CLEAR')" title="Clear stack">CLEAR</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="customWords">
-                    <div class="flex_2">
-                        <h3>Custom Words</h3>
-                        <input type="text" id="deleteWordInput" placeholder="Delete Word" onkeypress="handleDeleteWord(event)" ondrop="handleDeleteDrop(event)" ondragover="allowDrop(event)">
-                    </div>
-                    <div class="words-container" id="customWordsContainer"></div>
-                    <div class="flex_3">
-                        <input type="text" id="wordName" placeholder="Word Name" onkeypress="handleWordDefinitionKeypress(event, 'wordName')">
-                        <input type="text" id="wordDefinition" placeholder="Word Definition" onkeypress="handleWordDefinitionKeypress(event, 'wordDefinition')">
-                        <input type="text" id="wordDescription" placeholder="Word Description" onkeypress="handleWordDefinitionKeypress(event, 'wordDescription')">
-                        <button class="control-button" onclick="defineWord()">Define</button>
-                    </div>
-                </div>
-            </section>
-            <section id="stack">
-                <div class="flex_4">
-                    <h2>Stack</h2>
-                    <button id="runButton" class="control-button" onclick="runAllStacks()">▶</button>
-                </div>
-                <div class="flex_5">
-                    <div id="DataStack">
-                        <div class="flex_6">
-                            <h3>Data Stack</h3>
-                            <input type="text" class="stackInput" id="DataStackInput" placeholder="Enter value" onkeypress="handleStackInput(event, 'Data')" ondrop="dropToStack(event, 'DataStackInput')" ondragover="allowDrop(event)">
-                        </div>
-                        <div class="stackContainer" id="DataStackContainer" ondrop="dropToStack(event, 'Data')" ondragover="allowDrop(event)"></div>
-                    </div>
-                    <div id="ReturnStack">
-                        <div class="flex_7">
-                            <h3>Return Stack</h3>
-                            <input type="text" class="stackInput" id="ReturnStackInput" placeholder="Enter value" onkeypress="handleStackInput(event, 'Return')" ondrop="dropToStack(event, 'ReturnStackInput')" ondragover="allowDrop(event)">
-                        </div>
-                        <div class="stackContainer" id="ReturnStackContainer" ondrop="dropToStack(event, 'Return')" ondragover="allowDrop(event)"></div>
-                    </div>
-                </div>
-            </section>
+   <header id="page_header">
+    <div class="header_content">
+        <div class="logo">
+            <img src="images/logo.png" alt="SCRAP logo">
         </div>
-    </article>
-    <script src="dict.js"></script>
-    <script src="outer.js"></script>
-    <script src="repl.js"></script>
-    <script src="inner.js"></script>
-    <script src="main.js"></script>
+        <h1>
+            <ruby>SCRAP<rt>GUI FORTH</rt></ruby>
+        </h1>
+    </div>
+</header>
+   <article>
+       <section id="output">
+           <h2>Output</h2>
+           <div id="output_content"></div>
+       </section>
+       <div class="flex_1">
+           <section id="dictionary">
+               <h2>Dictionary</h2>
+               <div id="built_in_words">
+                   <h3>Built-in Words</h3>
+                   <div class="words_container">
+                       <div class="button_group">
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('+')" title="Add">+</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('-')" title="Subtract">-</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('*')" title="Multiply">*</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('/')" title="Divide">/</button>
+                       </div>
+                       <div class="button_group">
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('=')" title="Equal to">=</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('<>')" title="Not equal to">&lt;&gt;</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('>')" title="Greater than">&gt;</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('<')" title="Less than">&lt;</button>
+                       </div>
+                       <div class="button_group">
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('<=')" title="Less than or equal">&lt;=</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('>=')" title="Greater than or equal">&gt;=</button>
+                       </div>
+                       <div class="button_group">
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('DUP')" title="Duplicate top of stack">DUP</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('IF')" title="Start conditional">IF</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('ELSE')" title="Else condition">ELSE</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('THEN')" title="End conditional">THEN</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('DO')" title="Start loop">DO</button>
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('LOOP')" title="End loop">LOOP</button>
+                       </div>
+                       <div class="button_group">
+                           <button class="word_button" onclick="PUSH_TO_DATA_STACK('CLEAR')" title="Clear stack">CLEAR</button>
+                       </div>
+                   </div>
+               </div>
+               
+               <div id="custom_words">
+                   <div class="flex_2">
+                       <h3>Custom Words</h3>
+                       <input type="text" id="delete_word_input" placeholder="Delete Word" onkeypress="HANDLE_DELETE_WORD(event)" ondrop="HANDLE_DELETE_DROP(event)" ondragover="ALLOW_DROP(event)">
+                   </div>
+                   <div class="words_container" id="custom_words_container"></div>
+                   <div class="flex_3">
+                       <input type="text" id="word_name" placeholder="Word Name" onkeypress="HANDLE_WORD_DEFINITION_KEYPRESS(event, 'word_name')">
+                       <input type="text" id="word_definition" placeholder="Word Definition" onkeypress="HANDLE_WORD_DEFINITION_KEYPRESS(event, 'word_definition')">
+                       <input type="text" id="word_description" placeholder="Word Description" onkeypress="HANDLE_WORD_DEFINITION_KEYPRESS(event, 'word_description')">
+                       <button class="control_button" onclick="DEFINE_WORD()">Define</button>
+                   </div>
+               </div>
+           </section>
+           <section id="stack">
+               <div class="flex_4">
+                   <h2>Stacks</h2>
+                   <button id="run_button" class="control_button" onclick="RUN_ALL_STACKS()">▶</button>
+               </div>
+               <div class="flex_5">
+                   <div id="data_stack">
+                       <div class="flex_6">
+                           <h3>Data Stack</h3>
+                           <input type="text" class="stack_input" id="data_stack_input" placeholder="Enter value" onkeypress="HANDLE_STACK_INPUT(event, 'data')" ondrop="DROP_TO_STACK(event, 'data_stack_input')" ondragover="ALLOW_DROP(event)">
+                       </div>
+                       <div class="stack_container" id="data_stack_container" ondrop="DROP_TO_STACK(event, 'data')" ondragover="ALLOW_DROP(event)"></div>
+                   </div>
+                   <div id="return_stack">
+                       <div class="flex_7">
+                           <h3>Return Stack</h3>
+                           <input type="text" class="stack_input" id="return_stack_input" placeholder="Enter value" onkeypress="HANDLE_STACK_INPUT(event, 'return')" ondrop="DROP_TO_STACK(event, 'return_stack_input')" ondragover="ALLOW_DROP(event)">
+                       </div>
+                       <div class="stack_container" id="return_stack_container" ondrop="DROP_TO_STACK(event, 'return')" ondragover="ALLOW_DROP(event)"></div>
+                   </div>
+               </div>
+           </section>
+       </div>
+   </article>
+   <script src="js/dict.js"></script>
+   <script src="js/outer.js"></script>
+   <script src="js/repl.js"></script>
+   <script src="js/inner.js"></script>
+   <script src="js/main.js"></script>
 </body>
 </html>
