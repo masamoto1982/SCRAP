@@ -17,29 +17,34 @@ body {
 
 h1 {
    margin: 0;
-   line-height: 1;
 }
 
 h1 .subtitle {
    display: block;
    font-size: 0.4em;
-   margin-top: 0.1em;
-   line-height: 1;
 }
 
 #output {
-   background: ;
-   padding: 0.5em;
-   border: 1px solid #ccc;
-   overflow-y: auto;
-   word-wrap: break-word;
-   max-height: 200px;
-   position: relative;
+    background: ;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    word-wrap: break-word;
+    max-height: 200px;
+    position: relative;
 }
 
 #output_content {
-   border: 1px dashed #ccc;
-   padding: 0.5em;
+    border: 1px dashed #ccc;
+    padding: 0.5em;
+}
+
+#output_content > div {
+    margin-bottom: 0.5em;
+}
+
+#output_content > div:last-child {
+    margin-bottom: 0;
 }
 
 .flex_1 {
@@ -62,6 +67,26 @@ h1 .subtitle {
    flex: 1;
    min-width: 0;
    box-sizing: border-box;
+}
+
+.stack_container {
+    display: flex;
+    flex-direction: row;          /* 左から右に配置に変更 */
+    flex-wrap: wrap-reverse;      /* 折り返しは下から上に */
+    align-content: flex-start;    /* 上揃え */
+    gap: 0.5em;                   /* ボタン間の間隔 */
+    min-height: 50px;             /* 最小の高さを確保 */
+}
+
+/* スタックトップ以外を薄く表示 */
+.stack_container .word_button {
+    flex-shrink: 0;
+    opacity: 0.5;  /* デフォルトで薄く表示 */
+}
+
+/* スタックトップは完全な不透明度で表示 */
+.stack_container .word_button.stack_top {
+    opacity: 1;
 }
 
 .flex_3 {
@@ -191,6 +216,16 @@ h1 .subtitle {
 #custom_words {
    border: 1px dashed #ccc;
    padding: 0.5em;
+}
+
+#custom_words_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;  /* 組み込みワードと同じ間隔 */
+}
+
+#custom_words_container .word_button {
+    flex: 0 0 auto;  /* ボタンの自動サイズ調整 */
 }
 
 @media (max-width: 768px) {
