@@ -218,6 +218,16 @@ h1 .subtitle {
    padding: 0.5em;
 }
 
+#custom_words_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;  /* 組み込みワードと同じ間隔 */
+}
+
+#custom_words_container .word_button {
+    flex: 0 0 auto;  /* ボタンの自動サイズ調整 */
+}
+
 @media (max-width: 768px) {
    .flex_2, .flex_3, .flex_5 {
        display: block;

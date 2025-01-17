@@ -22,15 +22,74 @@ const FORTH = {
     ip: 0
 };
 
+// カスタムワード管理
+const CUSTOM_WORDS = {
+    definitions: new Map(),
+
+    exists: function(name) {
+        return this.definitions.has(name);
+    },
+
+    count: function() {
+        return this.definitions.size;
+    },
+
+    add: function(name, definition, description) {
+        DEBUG.log('CustomWord', `Adding custom word: ${name}`);
+        this.definitions.set(name, { definition, description });
+        this.updateDisplay();
+        this.updateDeleteInput();
+    },
+
+    remove: function(name) {
+        DEBUG.log('CustomWord', `Removing custom word: ${name}`);
+        if (!this.exists(name)) {
+            throw new Error("Custom word not found");
+        }
+        this.definitions.delete(name);
+        this.updateDisplay();
+        this.updateDeleteInput();
+    },
+
+    updateDisplay: function() {
+    DEBUG.log('CustomWord', 'Updating custom words display');
+    const container = document.getElementById('custom_words_container');
+    // words_containerクラスを追加
+    container.className = 'words_container';
+    container.innerHTML = '';
+
+    this.definitions.forEach((data, name) => {
+        const button = document.createElement('button');
+        button.className = 'word_button';
+        button.textContent = name;
+        button.title = data.description;
+        button.addEventListener('click', () => {
+            PUSH_TO_DATA_STACK(name);
+        });
+        // button_groupでラップ
+        const buttonGroup = document.createElement('div');
+        buttonGroup.className = 'button_group';
+        buttonGroup.appendChild(button);
+        container.appendChild(buttonGroup);
+    });
+},
+
+    updateDeleteInput: function() {
+        DEBUG.log('CustomWord', 'Updating delete input visibility');
+        const deleteWordContainer = document.querySelector('.flex_2');
+        if (this.count() === 0) {
+            deleteWordContainer.classList.add('no_words');
+        } else {
+            deleteWordContainer.classList.remove('no_words');
+        }
+    }
+};
+
 // IndexedDB設定
 const DB_NAME = 'forthDB';
 const DB_VERSION = 1;
 const STORE_NAME = 'dictionary';
-
-// =====================================
 // スタック操作の基本実装
-// =====================================
-
 function DUP() {
     DEBUG.log('Operation', 'DUP');
     if (FORTH.dataStack.length < 1) throw new Error("Stack underflow");
@@ -81,80 +140,44 @@ function R_FETCH() {
     DEBUG.stack();
 }
 
-// 算術演算
-function ADD() {
-    DEBUG.log('Operation', '+');
-    if (FORTH.dataStack.length < 2) throw new Error("Stack underflow");
-    const n2 = FORTH.dataStack.pop();
-    const n1 = FORTH.dataStack.pop();
-    FORTH.dataStack.push(n1 + n2);
+// UI関連の実装
+function CREATE_STACK_BUTTON(value) {
+    DEBUG.log('UI', `Creating stack button for value: ${value}`);
+    const button = document.createElement('button');
+    button.className = 'word_button';
+    button.textContent = value;
+    return button;
+}
+
+function UPDATE_DATA_STACK_DISPLAY() {
+    DEBUG.log('UI', 'Updating stack display');
+    const container = document.getElementById('data_stack_container');
+    container.innerHTML = '';
+    
+    FORTH.dataStack.forEach((value, index) => {
+        const button = CREATE_STACK_BUTTON(value);
+        if (index === FORTH.dataStack.length - 1) {
+            button.classList.add('stack_top');
+        }
+        container.appendChild(button);
+    });
     DEBUG.stack();
 }
 
-function SUBTRACT() {
-    DEBUG.log('Operation', '-');
-    if (FORTH.dataStack.length < 2) throw new Error("Stack underflow");
-    const n2 = FORTH.dataStack.pop();
-    const n1 = FORTH.dataStack.pop();
-    FORTH.dataStack.push(n1 - n2);
-    DEBUG.stack();
+function ADD_OUTPUT(text) {
+    DEBUG.log('Output', `Adding output: ${text}`);
+    const outputContent = document.getElementById('output_content');
+    
+    const outputLine = document.createElement('div');
+    outputLine.textContent = text;
+    
+    if (outputContent.firstChild) {
+        outputContent.insertBefore(outputLine, outputContent.firstChild);
+    } else {
+        outputContent.appendChild(outputLine);
+    }
 }
 
-// 比較演算
-function EQUALS() {
-    DEBUG.log('Operation', '=');
-    if (FORTH.dataStack.length < 2) throw new Error("Stack underflow");
-    const n2 = FORTH.dataStack.pop();
-    const n1 = FORTH.dataStack.pop();
-    FORTH.dataStack.push(n1 === n2 ? -1 : 0);
-    DEBUG.stack();
-}
-
-function LESS_THAN() {
-    DEBUG.log('Operation', '<');
-    if (FORTH.dataStack.length < 2) throw new Error("Stack underflow");
-    const n2 = FORTH.dataStack.pop();
-    const n1 = FORTH.dataStack.pop();
-    FORTH.dataStack.push(n1 < n2 ? -1 : 0);
-    DEBUG.stack();
-}
-
-// =====================================
-// 制御構造の実装
-// =====================================
-
-function IF() {
-    DEBUG.log('Control', 'IF');
-    if (!FORTH.compiling) throw new Error("IF only valid in compilation");
-    FORTH.currentDefinition.push(IF);
-    FORTH.currentDefinition.push(null);  // 分岐先アドレスのプレースホルダ
-}
-
-function THEN() {
-    DEBUG.log('Control', 'THEN');
-    if (!FORTH.compiling) throw new Error("THEN only valid in compilation");
-    const ifPos = FORTH.currentDefinition.indexOf(null);
-    if (ifPos === -1) throw new Error("Mismatched THEN");
-    FORTH.currentDefinition[ifPos] = FORTH.currentDefinition.length;
-}
-
-function DO() {
-    DEBUG.log('Control', 'DO');
-    if (!FORTH.compiling) throw new Error("DO only valid in compilation");
-    FORTH.currentDefinition.push(DO);
-    FORTH.currentDefinition.push(FORTH.currentDefinition.length);
-}
-
-function LOOP() {
-    DEBUG.log('Control', 'LOOP');
-    if (!FORTH.compiling) throw new Error("LOOP only valid in compilation");
-    FORTH.currentDefinition.push(LOOP);
-    const doPos = FORTH.currentDefinition.indexOf(DO);
-    if (doPos === -1) throw new Error("Mismatched LOOP");
-    FORTH.currentDefinition.push(doPos + 1);
-}
-
-// ワードの実行処理
 function EXECUTE_WORD(word) {
     DEBUG.log('Execute', `Executing word: ${word}`);
     
@@ -172,105 +195,15 @@ function EXECUTE_WORD(word) {
             FORTH.dataStack.push(result);
             DEBUG.log('Execute', `${n1} + ${n2} = ${result}`);
             return `${n1} + ${n2} = ${result}`;
-        default:
-            throw new Error(`Unknown word: ${word}`);
     }
-}
 
-// 出力を追加する関数
-function ADD_OUTPUT(text) {
-    DEBUG.log('Output', `Adding output: ${text}`);
-    const outputContent = document.getElementById('output_content');
-    
-    // 新しい出力用のdiv要素を作成
-    const outputLine = document.createElement('div');
-    outputLine.textContent = text;
-    
-    // 最新の出力を先頭に追加
-    if (outputContent.firstChild) {
-        outputContent.insertBefore(outputLine, outputContent.firstChild);
-    } else {
-        outputContent.appendChild(outputLine);
+    if (CUSTOM_WORDS.exists(word)) {
+        const customWord = CUSTOM_WORDS.definitions.get(word);
+        DEBUG.log('Execute', `Executing custom word: ${word} with definition: ${customWord.definition}`);
+        return `Executed custom word: ${word}`;
     }
-}
 
-// Runボタンのハンドラを修正
-function RUN_ALL_STACKS() {
-    DEBUG.log('Run', 'Execute button pressed');
-    
-    try {
-        // スタック上の最後のワードを実行
-        const word = FORTH.dataStack[FORTH.dataStack.length - 1];
-        if (word === '+') {
-            const output = EXECUTE_WORD(FORTH.dataStack.pop());
-            // 結果を出力履歴に追加
-            ADD_OUTPUT(output);
-        }
-        // スタックの表示を更新
-        UPDATE_DATA_STACK_DISPLAY();
-        
-    } catch (error) {
-        DEBUG.log('Error', error.message);
-        ADD_OUTPUT(`Error: ${error.message}`);
-    }
-}
-
-// =====================================
-// IndexedDB関連の実装
-// =====================================
-
-async function initDB() {
-    DEBUG.log('DB', 'Initializing IndexedDB');
-    return new Promise((resolve, reject) => {
-        const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-        request.onerror = () => {
-            DEBUG.log('DB', 'Error initializing DB');
-            reject(request.error);
-        };
-        
-        request.onsuccess = () => {
-            DEBUG.log('DB', 'Successfully initialized DB');
-            const db = request.result;
-            loadDictionary(db).then(resolve);
-        };
-
-        request.onupgradeneeded = (event) => {
-            DEBUG.log('DB', 'Upgrading DB');
-            const db = event.target.result;
-            if (!db.objectStoreNames.contains(STORE_NAME)) {
-                db.createObjectStore(STORE_NAME, { keyPath: 'name' });
-            }
-        };
-    });
-}
-
-// =====================================
-// UI関連の実装
-// =====================================
-
-function CREATE_STACK_BUTTON(value) {
-    DEBUG.log('UI', `Creating stack button for value: ${value}`);
-    const button = document.createElement('button');
-    button.className = 'word_button';
-    button.textContent = value;
-    return button;
-}
-
-function UPDATE_DATA_STACK_DISPLAY() {
-    DEBUG.log('UI', 'Updating stack display');
-    const container = document.getElementById('data_stack_container');
-    container.innerHTML = '';
-    
-    FORTH.dataStack.forEach((value, index) => {
-        const button = CREATE_STACK_BUTTON(value);
-        if (index === FORTH.dataStack.length - 1) {
-            button.classList.add('stack_top');  // スタックトップにクラスを追加
-        }
-        container.appendChild(button);  // 単純に追加（左から右へ）
-    });
-    
-    DEBUG.stack();
+    throw new Error(`Unknown word: ${word}`);
 }
 
 function PUSH_TO_DATA_STACK(value) {
@@ -295,18 +228,110 @@ function HANDLE_STACK_INPUT(event) {
     }
 }
 
-// =====================================
-// 初期化と起動
-// =====================================
+function HANDLE_WORD_DEFINITION_KEYPRESS(event, currentField) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        
+        const nameInput = document.getElementById('word_name');
+        const defInput = document.getElementById('word_definition');
+        const descInput = document.getElementById('word_description');
+
+        switch(currentField) {
+            case 'word_name':
+                defInput.focus();
+                break;
+            case 'word_definition':
+                descInput.focus();
+                break;
+            case 'word_description':
+                DEFINE_WORD();
+                nameInput.focus();
+                break;
+        }
+    }
+}
+
+function DEFINE_WORD() {
+    const nameInput = document.getElementById('word_name');
+    const defInput = document.getElementById('word_definition');
+    const descInput = document.getElementById('word_description');
+
+    const name = nameInput.value.trim();
+    const definition = defInput.value.trim();
+    const description = descInput.value.trim();
+
+    try {
+        if (!name || !definition) {
+            throw new Error("Name and definition are required");
+        }
+        if (FORTH.dictionary.has(name)) {
+            throw new Error("Cannot redefine built-in word");
+        }
+
+        CUSTOM_WORDS.add(name, definition, description);
+
+        nameInput.value = '';
+        defInput.value = '';
+        descInput.value = '';
+
+        DEBUG.log('CustomWord', `Successfully defined word: ${name}`);
+        ADD_OUTPUT(`Defined: ${name}`);
+
+    } catch (error) {
+        DEBUG.log('Error', error.message);
+        ADD_OUTPUT(`Error: ${error.message}`);
+    }
+}
+
+function HANDLE_DELETE_WORD(event) {
+    if (event.key === 'Enter') {
+        const input = event.target;
+        const name = input.value.trim();
+
+        try {
+            if (FORTH.dictionary.has(name)) {
+                throw new Error("Cannot delete built-in word");
+            }
+            if (!CUSTOM_WORDS.exists(name)) {
+                throw new Error("Custom word not found");
+            }
+
+            CUSTOM_WORDS.remove(name);
+            input.value = '';
+            
+            DEBUG.log('CustomWord', `Successfully deleted word: ${name}`);
+            ADD_OUTPUT(`Deleted: ${name}`);
+
+        } catch (error) {
+            DEBUG.log('Error', error.message);
+            ADD_OUTPUT(`Error: ${error.message}`);
+        }
+    }
+}
+
+function RUN_ALL_STACKS() {
+    DEBUG.log('Run', 'Execute button pressed');
+    
+    try {
+        const word = FORTH.dataStack[FORTH.dataStack.length - 1];
+        if (word === '+') {
+            const output = EXECUTE_WORD(FORTH.dataStack.pop());
+            ADD_OUTPUT(output);
+        }
+        UPDATE_DATA_STACK_DISPLAY();
+        
+    } catch (error) {
+        DEBUG.log('Error', error.message);
+        ADD_OUTPUT(`Error: ${error.message}`);
+    }
+}
 
 function INIT_UI() {
     DEBUG.log('Init', 'Initializing UI');
     
-    // DataStack入力欄のイベントリスナー設定
     const input = document.getElementById('data_stack_input');
     input.addEventListener('keypress', HANDLE_STACK_INPUT);
     
-    // 組み込みワードボタンのイベントリスナー設定
     const wordButtons = document.querySelectorAll('.word_button');
     wordButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -314,21 +339,15 @@ function INIT_UI() {
         });
     });
 
+    CUSTOM_WORDS.updateDeleteInput();
+
     DEBUG.log('Init', 'UI initialization completed');
 }
 
-async function INIT_APPLICATION() {
+function INIT_APPLICATION() {
     DEBUG.log('Init', 'Starting application initialization');
-    
-    try {
-        await initDB();
-        INIT_UI();
-        DEBUG.log('Init', 'Application initialization completed');
-    } catch (error) {
-        DEBUG.log('Error', `Initialization failed: ${error.message}`);
-        console.error(error);
-    }
+    INIT_UI();
+    DEBUG.log('Init', 'Application initialization completed');
 }
 
-// アプリケーション起動
 document.addEventListener('DOMContentLoaded', INIT_APPLICATION);
