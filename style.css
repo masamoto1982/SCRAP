@@ -228,6 +228,11 @@ h1 .subtitle {
     flex: 0 0 auto;  /* ボタンの自動サイズ調整 */
 }
 
+/* 削除欄の非表示制御 */
+.no_words #delete_word_input {
+    display: none;
+}
+
 @media (max-width: 768px) {
    .flex_2, .flex_3, .flex_5 {
        display: block;
