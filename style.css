@@ -4,12 +4,12 @@ body {
    height: 100vh;
 }
 
-#page_header {
+#h {
    background: ;
    padding: 0.5em;
 }
 
-.header_content {
+.hc {
    display: flex;
    align-items: center;
    gap: 0.5em;
@@ -19,12 +19,12 @@ h1 {
    margin: 0;
 }
 
-h1 .subtitle {
+.sttl {
    display: block;
    font-size: 0.4em;
 }
 
-#output {
+#out {
     background: ;
     padding: 0.5em;
     border: 1px solid #ccc;
@@ -34,110 +34,106 @@ h1 .subtitle {
     position: relative;
 }
 
-#output_content {
+#outc {
     border: 1px dashed #ccc;
     padding: 0.5em;
 }
 
-#output_content > div {
+#outc > div {
     margin-bottom: 0.5em;
 }
 
-#output_content > div:last-child {
+#outc > div:last-child {
     margin-bottom: 0;
 }
 
-.flex_1 {
+.f1 {
    display: flex;
 }
 
-.flex_2, .flex_6 {
+.f2, .f6 {
    display: flex;
    align-items: center;
    gap: 1em;
    flex-wrap: nowrap;
 }
 
-.flex_2 h3, .flex_6 h3 {
+.f2 h3, .f6 h3 {
    flex-shrink: 0;
 }
 
-.stack_input, #delete_word_input {
+.si, #del {
    border: 1px solid #ccc;
    flex: 1;
    min-width: 0;
    box-sizing: border-box;
 }
 
-.stack_container {
+.sc {
     display: flex;
-    flex-direction: row;          /* 左から右に配置に変更 */
-    flex-wrap: wrap-reverse;      /* 折り返しは下から上に */
-    align-content: flex-start;    /* 上揃え */
-    gap: 0.5em;                   /* ボタン間の間隔 */
-    min-height: 50px;             /* 最小の高さを確保 */
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    align-content: flex-start;
+    gap: 0.5em;
+    min-height: 50px;
 }
 
-/* スタックトップ以外を薄く表示 */
-.stack_container .word_button {
+.sc .wb {
     flex-shrink: 0;
-    opacity: 0.5;  /* デフォルトで薄く表示 */
+    opacity: 0.5;
 }
 
-/* スタックトップは完全な不透明度で表示 */
-.stack_container .word_button.stack_top {
+.sc .wb.top {
     opacity: 1;
 }
 
-.flex_3 {
+.f3 {
    display: flex;
    gap: 0.5em;
    margin-top: 0.5em;
    flex-wrap: nowrap;
 }
 
-#word_name,
-#word_definition,
-#word_description {
+#wn, #wd, #wdes {
    border: 1px solid #ccc;
    flex: 1;
    min-width: 0;
 }
 
-.flex_3 .control_button {
+.f3 .cb {
    flex-shrink: 0;
 }
 
-.flex_4 {
+.f4 {
    display: flex;
    align-items: center;
    gap: 1em;
 }
 
-.flex_5 {
+.f5 {
    display: flex;
    gap: 0.5em;
    width: 100%;
 }
 
-.flex_7 {
+.f7 {
    display: flex;
    align-items: center;
    gap: 1em;
 }
 
-.control_button {
+.cb {
    border: 1px solid #ccc;
    border-radius: 4px;
    background: #fff;
    cursor: pointer;
 }
 
-.control_button:hover {
+.cb:hover {
    background: #f0f0f0;
 }
 
-.word_button {
+.wb {
    border: 1px solid #ccc;
    border-radius: 4px;
    background: #fff;
@@ -145,125 +141,124 @@ h1 .subtitle {
    touch-action: manipulation;
 }
 
-.word_button:hover {
+.wb:hover {
    background: #f0f0f0;
 }
 
-.word_button:active {
+.wb:active {
    background: #e0e0e0;
 }
 
-#stack {
+#stk {
    border: 1px solid #ccc;
    background: ;
    width: 50%;
    padding: 0.5em;
 }
 
-#data_stack, #return_stack {
+#ds, #rs {
    width: calc(50% - 0.25em);
    border: 1px dashed #ccc;
    padding: 0.5em;
 }
 
-#return_stack {
+#rs {
    opacity: 0.8;
 }
 
-.words_container {
+.wc {
    display: flex;
    flex-direction: column;
    gap: 0.5em;
 }
 
-.button_group {
+.bg {
    display: flex;
    flex-wrap: wrap;
    gap: 0.5em;
    margin-bottom: 0.5em;
 }
 
-.button_group:last-child {
+.bg:last-child {
    margin-bottom: 0;
 }
 
-#built_in_words h3 {
+#biw h3 {
    margin-bottom: 1em;
 }
 
-.stack_placeholder {
+.sp {
    color: #ccc;
    text-align: center;
 }
 
-.faded_button {
+.fb {
    opacity: 0.5;
 }
 
-#dictionary {
+#dic {
    border: 1px solid #ccc;
    background: ;
    width: 50%;
    padding: 0.5em;
 }
 
-#built_in_words {
+#biw {
    border: 1px dashed #ccc;
    padding: 0.5em;
    margin-bottom: 0.5em;
 }
 
-#custom_words {
+#cw {
    border: 1px dashed #ccc;
    padding: 0.5em;
 }
 
-#custom_words_container {
+#cwc {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5em;  /* 組み込みワードと同じ間隔 */
+    gap: 0.5em;
 }
 
-#custom_words_container .word_button {
-    flex: 0 0 auto;  /* ボタンの自動サイズ調整 */
+#cwc .wb {
+    flex: 0 0 auto;
 }
 
-/* 削除欄の非表示制御 */
-.no_words #delete_word_input {
+.f2.nw #del {
     display: none;
 }
 
 @media (max-width: 768px) {
-   .flex_2, .flex_3, .flex_5 {
+   .f2, .f3, .f5 {
        display: block;
    }
 
-   .flex_2 {
+   .f2 {
        width: 100%;
    }
 
-   .flex_6, .flex_7 {
+   .f6, .f7 {
        display: block;
        width: 100%;
    }
 
-   .stack_input, #delete_word_input {
+   .si, #del {
        width: 100%;
        box-sizing: border-box;
        margin-top: 0.5em;
    }
 
-   #data_stack {
+   #ds {
        margin: 0 0 0.5em 0;
        width: auto;
    }
 
-   #return_stack {
+   #rs {
        margin: 0;
        width: auto;
    }
 
-   #data_stack, #return_stack {
+   #ds, #rs {
        padding: 0.5em;
    }
 
@@ -271,29 +266,27 @@ h1 .subtitle {
        margin: 0;
    }
 
-   .stack_container {
+   .sc {
        margin-top: 1em;
        min-height: 50px;
    }
 
-   .flex_3 {
+   .f3 {
        display: block;
        width: 100%;
    }
 
-   #word_name,
-   #word_definition,
-   #word_description {
+   #wn, #wd, #wdes {
        width: 100%;
        box-sizing: border-box;
        margin-bottom: 0.5em;
    }
 
-   #word_description {
+   #wdes {
        margin-bottom: 0;
    }
 
-   .flex_3 .control_button {
+   .f3 .cb {
        width: 100%;
        margin-top: 0.5em;
    }
@@ -310,55 +303,49 @@ h1 .subtitle {
         box-sizing: border-box;
     }
 
-   #output,
-   #stack,
-   #dictionary {
+   #out, #stk, #dic {
        width: 100%;
        box-sizing: border-box;
        margin: 0;
    }
 
-   .flex_1 {
+   .f1 {
        display: flex;
        flex-direction: column;
    }
 
-   #stack {
+   #stk {
        order: 1;
    }
 
-   #dictionary {
+   #dic {
        order: 2;
    }
 
-   .flex_6, .flex_7 {
+   .f6, .f7 {
        display: flex;
        align-items: center;
        gap: 1em;
        flex-wrap: nowrap;
    }
 
-   .flex_2 {
+   .f2 {
        display: flex;
        align-items: center;
        gap: 1em;
    }
 
-   .flex_3 {
+   .f3 {
        display: flex;
        flex-direction: column;
        gap: 0.5em;
    }
 
-   .stack_input {
+   .si {
        min-width: 0;
    }
 
-   .stack_input,
-   #delete_word_input,
-   #word_name,
-   #word_definition,
-   #word_description {
+   .si, #del, #wn, #wd, #wdes {
        width: 100%;
        box-sizing: border-box;
    }
