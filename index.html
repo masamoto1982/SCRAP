@@ -1,115 +1,270 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SCRAP</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header id="page_header">
-        <div class="header_content">
-            <div class="logo">
-                <img src="images/logo.png" alt="SCRAP logo">
-            </div>
-            <div class="title">
-    <div class="subtitle">GUI FORTH</div>
-	<h1>SCRAP</h1>
-    
-</div>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header id="h">
+      <div class="hc">
+        <div class="lg">
+          <img src="images/logo.png" alt="SCRAP logo" />
         </div>
+        <div class="ttl">
+          <div class="sttl">Stack-based Visual Programming System</div>
+          <h1 title="SCRAPは、一言でいえばGUIを付け足したFORTHです。FORTHとは1970年代にチャールズ・ムーアによって解発されたプログラミング言語です。単純な仕組みで無限の拡張性を提供する優れた特徴を持ちますが、扱うには常にスタックの状態を意識する必要があり、今日では活躍の場が限られています。SCRAPはFORTHの難しさをGUIによって解決する試みであり、その名称は先発のビジュアルプログラミング言語であるScratchを捩ったものです。">SCRAP</h1>
+        </div>
+      </div>
     </header>
     <article>
-        <section id="output">
-            <h2>Output</h2>
-            <div id="output_content"></div>
+      <section id="out">
+        <h2 title="システムに対して行われた操作とプログラムの実行結果が表示されます。">Output</h2>
+        <div id="outc"></div>
+      </section>
+      <div class="f1">
+        <section id="dic">
+          <h2 title="Dictionaryはワードを格納する場所です。FORTHにおけるワードとは、他のプログラミング言語でいえば関数にあたります。スタックにワードを積むには、Dictionaryに配されたワードをクリックするか、DataStackに備わる入力欄から呼び出してください。">Dictionary</h2>
+          <div id="biw">
+            <h3 title="システムに予め組み込まれた基本的なワードが格納されています。">Built-in Words</h3>
+            <div class="wc">
+              <div class="bg">
+                <button
+                  class="wb"
+                  onclick="push('DUP')"
+                  title="Duplicate top of stack"
+                >
+                  DUP
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('DROP')"
+                  title="Drop top of stack"
+                >
+                  DROP
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('SWAP')"
+                  title="Exchange top two items"
+                >
+                  SWAP
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('OVER')"
+                  title="Copy second item to top"
+                >
+                  OVER
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('ROT')"
+                  title="Rotate top three items"
+                >
+                  ROT
+                </button>
+              </div>
+              <div class="bg">
+                <button
+                  class="wb"
+                  onclick="push('>R')"
+                  title="Move from data stack to return stack"
+                >
+                  &gt;R
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('R>')"
+                  title="Move from return stack to data stack"
+                >
+                  R&gt;
+                </button>
+              </div>
+              <div class="bg">
+                <button class="wb" onclick="push('+')" title="Add">+</button>
+                <button class="wb" onclick="push('-')" title="Subtract">
+                  -
+                </button>
+                <button class="wb" onclick="push('*')" title="Multiply">
+                  *
+                </button>
+                <button class="wb" onclick="push('/')" title="Divide">/</button>
+              </div>
+              <div class="bg">
+                <button class="wb" onclick="push('=')" title="Equal to">
+                  =
+                </button>
+                <button class="wb" onclick="push('<>')" title="Not equal to">
+                  &lt;&gt;
+                </button>
+                <button class="wb" onclick="push('<')" title="Less than">
+                  &lt;
+                </button>
+                <button class="wb" onclick="push('>')" title="Greater than">
+                  &gt;
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('<=')"
+                  title="Less than or equal"
+                >
+                  &lt;=
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('>=')"
+                  title="Greater than or equal"
+                >
+                  &gt;=
+                </button>
+              </div>
+              <div class="bg">
+                <button
+                  class="wb"
+                  onclick="push('IF')"
+                  title="Start conditional"
+                >
+                  IF
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('ELSE')"
+                  title="Alternative conditional"
+                >
+                  ELSE
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('THEN')"
+                  title="End conditional"
+                >
+                  THEN
+                </button>
+              </div>
+              <div class="bg">
+                <button class="wb" onclick="push('DO')" title="Start loop">
+                  DO
+                </button>
+                <button class="wb" onclick="push('LOOP')" title="End loop">
+                  LOOP
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('I')"
+                  title="Current loop index"
+                >
+                  I
+                </button>
+              </div>
+              <div class="bg">
+                <button
+                  class="wb"
+                  onclick="push('@')"
+                  title="Fetch value from address"
+                >
+                  @
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('!')"
+                  title="Store value to address"
+                >
+                  !
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('VARIABLE')"
+                  title="Define new variable"
+                >
+                  VARIABLE
+                </button>
+                <button
+                  class="wb"
+                  onclick="push('CONSTANT')"
+                  title="Define new constant"
+                >
+                  CONSTANT
+                </button>
+              </div>
+              <div class="bg">
+                <button
+                  class="wb"
+                  onclick="push('CLEAR')"
+                  title="スタックを空にします。"
+                >
+                  CLEAR
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="cw">
+            <div class="f2">
+              <h3 title="新しいワードの定義や削除を行えます。削除できるのはカスタムワードのみで、組み込みワードに変更を加えることは出来ません。組込みワードの保護はシステムの破壊を防ぐためのSCRAPの独自仕様であり、伝統的なFORTHでは組み込みワードの意味を上書きすることが可能です。">Custom Words</h3>
+             
+                        <input type="text" id="del" placeholder="Delete" onkeypress="hdel(event)" ondrop="ddel(event)" ondragover="adrp(event)">
+                    </div>
+            <div class="wc" id="cwc"></div>
+            <div class="f3">
+              <input
+                type="text"
+                id="wn"
+                placeholder="Name"
+                onkeypress="hdef(event, 'wn')"
+              />
+              <input
+                type="text"
+                id="wd"
+                placeholder="Definition"
+                onkeypress="hdef(event, 'wd')"
+              />
+              <input
+                type="text"
+                id="wdes"
+                placeholder="Description"
+                onkeypress="hdef(event, 'wdes')"
+              />
+              <button class="cb" onclick="def()">Define</button>
+            </div>
+          </div>
         </section>
-        <div class="flex_1">
-            <section id="dictionary">
-                <h2>Dictionary</h2>
-                <div id="built_in_words">
-                    <h3>Built-in Words</h3>
-                    <div class="words_container">
-                        <div class="button_group">
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('DUP')" title="Duplicate top of stack">DUP</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('DROP')" title="Drop top of stack">DROP</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('SWAP')" title="Exchange top two items">SWAP</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('OVER')" title="Copy second item to top">OVER</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('ROT')" title="Rotate top three items">ROT</button>
-                        </div>
-                        <div class="button_group">
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('>R')" title="Move from data stack to return stack">&gt;R</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('R>')" title="Move from return stack to data stack">R&gt;</button>
-                        </div>
-                        <div class="button_group">
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('+')" title="Add">+</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('-')" title="Subtract">-</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('*')" title="Multiply">*</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('/')" title="Divide">/</button>
-                        </div>
-                        <div class="button_group">
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('=')" title="Equal to">=</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('<>')" title="Not equal to">&lt;&gt;</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('<')" title="Less than">&lt;</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('>')" title="Greater than">&gt;</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('<=')" title="Less than or equal">&lt;=</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('>=')" title="Greater than or equal">&gt;=</button>
-                        </div>
-                        <div class="button_group">
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('IF')" title="Start conditional">IF</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('THEN')" title="End conditional">THEN</button>
-                        </div>
-                        <div class="button_group">
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('DO')" title="Start loop">DO</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('LOOP')" title="End loop">LOOP</button>
-							<button class="word_button" onclick="PUSH_TO_DATA_STACK('I')" title="Current loop index">I</button>
-                        </div>
-                        <div class="button_group">
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('@')" title="Fetch value from address">@</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('!')" title="Store value to address">!</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('VARIABLE')" title="Define new variable">VARIABLE</button>
-                            <button class="word_button" onclick="PUSH_TO_DATA_STACK('CONSTANT')" title="Define new constant">CONSTANT</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="custom_words">
-                    <div class="flex_2">
-                        <h3>Custom Words</h3>
-                        <input type="text" id="delete_word_input" placeholder="Delete Word" onkeypress="HANDLE_DELETE_WORD(event)" ondrop="HANDLE_DELETE_DROP(event)" ondragover="ALLOW_DROP(event)">
-                    </div>
-                    <div class="words_container" id="custom_words_container"></div>
-                    <div class="flex_3">
-                        <input type="text" id="word_name" placeholder="Word Name" onkeypress="HANDLE_WORD_DEFINITION_KEYPRESS(event, 'word_name')">
-                        <input type="text" id="word_definition" placeholder="Word Definition" onkeypress="HANDLE_WORD_DEFINITION_KEYPRESS(event, 'word_definition')">
-                        <input type="text" id="word_description" placeholder="Word Description" onkeypress="HANDLE_WORD_DEFINITION_KEYPRESS(event, 'word_description')">
-                        <button class="control_button" onclick="DEFINE_WORD()">Define</button>
-                    </div>
-                </div>
-            </section>
-            <section id="stack">
-                <div class="flex_4">
-                    <h2>Stacks</h2>
-                    <button id="run_button" class="control_button" onclick="RUN_ALL_STACKS()">▶</button>
-                </div>
-                <div class="flex_5">
-                    <div id="data_stack">
-                        <div class="flex_6">
-                            <h3>Data Stack</h3>
-                            <input type="text" class="stack_input" id="data_stack_input" placeholder="Enter value" onkeypress="HANDLE_STACK_INPUT(event, 'data')" ondrop="DROP_TO_STACK(event, 'data_stack_input')" ondragover="ALLOW_DROP(event)">
-                        </div>
-                        <div class="stack_container" id="data_stack_container" ondrop="DROP_TO_STACK(event, 'data')" ondragover="ALLOW_DROP(event)"></div>
-                    </div>
-                    <div id="return_stack">
-                        <div class="flex_7">
-                            <h3>Return Stack</h3>
-                        </div>
-                        <div class="stack_container" id="return_stack_container"></div>
-                    </div>
-                </div>
-            </section>
-        </div>
+        <section id="stk">
+          <div class="f4">
+            <h2 title="SCRAPには、二つのスタックが備わっています。">Stacks</h2>
+            <button id="run" class="cb" onclick="run()" title="クリックするとプログラムが実行されます。">▶</button>
+          </div>
+          <div class="f5">
+            <div id="ds">
+              <div class="f6">
+                <h3 title="処理の主体となるスタックです。スタックに値を積むには、Dictionaryエリアに配されたワードをクリックするか、DataStackに備わる入力欄を利用してください。SCRAPでは、大文字と小文字を区別しないため、「IF」「if」「If」「iF」はすべて同等に扱われます。">Data Stack</h3>
+                <input
+                  type="text"
+                  class="si"
+                  id="dsi"
+                  placeholder="Enter value"
+                  onkeypress="hinp(event)"
+                  ondrop="drps(event, 'dsi')"
+                  ondragover="adrp(event)"
+                / >
+              </div>
+              <div
+                class="sc"
+                id="dsc"
+                ondrop="drps(event, 'ds')"
+                ondragover="adrp(event)"
+              ></div>
+            </div>
+            <div id="rs">
+              <div class="f7">
+                <h3 title="処理の補助をなすスタックです。情報の仮置き場のような使い方をします。ここには情報を直接積むことは出来ません。ReturnStackに情報を積むには「>R」や「R>」などのスタック操作ワードを使います。">Return Stack</h3>
+              </div>
+              <div class="sc" id="rsc"></div>
+            </div>
+          </div>
+        </section>
+      </div>
     </article>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
